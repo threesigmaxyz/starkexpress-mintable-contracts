@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="../../../index.html">Home</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="../../../src/erc721/index.html">❱ erc721</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/erc721/ERC721Mintable.sol/contract.ERC721Mintable.html">ERC721Mintable</a></li><li class="chapter-item "><a href="../../../src/erc721/IERC721Mintable.sol/interface.IERC721Mintable.html">IERC721Mintable</a></li></ol></li><li class="chapter-item expanded "><a href="../../../src/utils/index.html">❱ utils</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../src/utils/ByteUtils.sol/library.ByteUtils.html" class="active">ByteUtils</a></li></ol></li><li class="chapter-item "><a href="../../../src/IMintable.sol/interface.IMintable.html">IMintable</a></li><li class="chapter-item "><a href="../../../src/Mintable.sol/abstract.Mintable.html">Mintable</a></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="../../../index.html">Home</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="../../../src/erc20/index.html">❱ erc20</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/erc20/ERC20Mintable.sol/contract.ERC20Mintable.html">ERC20Mintable</a></li><li class="chapter-item "><a href="../../../src/erc20/IERC20Mintable.sol/interface.IERC20Mintable.html">IERC20Mintable</a></li></ol></li><li class="chapter-item "><a href="../../../src/erc721/index.html">❱ erc721</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/erc721/ERC721Mintable.sol/contract.ERC721Mintable.html">ERC721Mintable</a></li><li class="chapter-item "><a href="../../../src/erc721/IERC721Mintable.sol/interface.IERC721Mintable.html">IERC721Mintable</a></li></ol></li><li class="chapter-item expanded "><a href="../../../src/utils/index.html">❱ utils</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../src/utils/ByteUtils.sol/library.ByteUtils.html" class="active">ByteUtils</a></li></ol></li><li class="chapter-item "><a href="../../../src/IMintable.sol/interface.IMintable.html">IMintable</a></li><li class="chapter-item "><a href="../../../src/Mintable.sol/abstract.Mintable.html">Mintable</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,12 +146,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="byteutils"><a class="header" href="#byteutils">ByteUtils</a></h1>
-<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/214617a1d53f37f1733208e61413b7c456237638/src/utils/ByteUtils.sol">Git Source</a></p>
+<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/0e7def4dee7e4a0ad8e13969d69430c2fe0378a1/src/utils/ByteUtils.sol">Git Source</a></p>
 <p>Library for byte array manipulation.</p>
 <h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
 <h3 id="touint256"><a class="header" href="#touint256">toUint256</a></h3>
 <p>Converts a slice of bytes into a uint256.</p>
-<p><em><code>_bytes</code> must have a length of at least <code>(_start + 32)</code> bytes.</em></p>
+<p><em>The input <code>_bytes</code> must have a length of at least <code>(_start + 32)</code> bytes.</em></p>
 <pre><code class="language-solidity">function toUint256(bytes memory _bytes, uint256 _start) internal pure returns (uint256);
 </code></pre>
 <p><strong>Parameters</strong></p>
