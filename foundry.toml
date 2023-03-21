@@ -19,23 +19,15 @@ quote_style                      = "double"     # Defines the quotation mark sty
 number_underscore                = "thousands"  # Style of underscores in number literals. Valid values are: "preserve", "thousands" or "remove".
 
 [doc]
-out    = "docs"             # An output path for generated documentation.
-title  = "Foundry Template" # Title for the generated documentation.
-book   = "./book.toml"      # Path to user provided book.toml.
-ignore = []                 # List of files to ignore when generating documentation.
+out    = "docs"                             # An output path for generated documentation.
+title  = "StarkExpress Mintable Contracts"  # Title for the generated documentation.
+book   = "./book.toml"                      # Path to user provided book.toml.
+ignore = []                                 # List of files to ignore when generating documentation.
 
 [profile.deploy.rpc_endpoints]
-arbitrum = "${RPC_URL_ARBITRUM}"
-avalanche = "${RPC_URL_AVALANCHE}"
 goerli   = "${RPC_URL_GOERLI}"
 mainnet  = "${RPC_URL_MAINNET}"
-optimism = "${RPC_URL_OPTIMISM}"
-polygon  = "${RPC_URL_POLYGON}"
 
 [profile.deploy.etherscan]
-arbitrum  = { key = "${ARBISCAN_KEY}",           url = "https://api.arbiscan.io/api" }
-avalanche = { key = "${SNOWTRACE_KEY}",          url = "https://api.snowtrace.io/api" }
-goerli    = { key = "${ETHERSCAN_KEY}",          url = "https://api-goerli.etherscan.io/api" }
+goerli    = { key = "${ETHERSCAN_KEY}", url = "https://api-goerli.etherscan.io/api" }
 mainnet   = { key = "${ETHERSCAN_KEY}" }
-optimism  = { key = "${OPTIMISM_ETHERSCAN_KEY}", url = "https://api-optimistic.etherscan.io/api" }
-polygon   = { key = "${POLYGONSCAN_KEY}",        url = "https://api.polygonscan.com/api" }

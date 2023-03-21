@@ -46,24 +46,16 @@ slither :;
 documentation :;
 	@forge doc --build
 
-# Deploy a local blockchain
+# Run local blockchain
 anvil :;
 	@anvil -m 'test test test test test test test test test test test junk'
 
-# This is the private key of account from the mnemonic from the "make anvil" command
-deploy-anvil :;
-	@forge script script/01_Deploy.s.sol:Deploy --rpc-url http://localhost:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 --broadcast
-
-# Deploy the contract to remote network and verify the code
-deploy-network :;
+deploy-local :;
 	@export FOUNDRY_PROFILE=deploy && \
-	forge script script/01_Deploy.s.sol:Deploy -f ${network} --broadcast --verify --delay 20 --retries 10 -vvvv && \
+	./utils/deploy_local.sh && \
 	export FOUNDRY_PROFILE=default
 
-run-script :;
+deploy-remote :;
 	@export FOUNDRY_PROFILE=deploy && \
-	./utils/run_script.sh && \
+	./utils/deploy_remote.sh && \
 	export FOUNDRY_PROFILE=default
-
-run-script-local :;
-	@./utils/run_script_local.sh
