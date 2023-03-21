@@ -62,6 +62,25 @@ jobs:
         with:
           node-version: 16
           fail-on: medium
+          slither-args: --checklist --markdown-root ${{ github.server_url }}/${{ github.repository }}/blob/${{ github.sha }}
+
+      - name: Add Summary Comment
+        if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          # delete the comment in case changes no longer impact gas costs
+          #delete: ${{ !steps.gas_diff.outputs.markdown }}
+          message: ${{ steps.slither.outputs.stdout }}
+
+      #- name: Add Summary Comment
+      #  uses: actions/github-script@v6
+      #  if: github.event_name == 'pull_request'
+      #  with:
+      #    script: |
+      #      const script = require('.github/scripts/comment')
+      #      const header = '# Slither report'
+      #      const body = `${{ steps.slither.outputs.stdout }}`
+      #      await script({ github, context, header, body })
 
   gas-report:
     name: Gas Report
