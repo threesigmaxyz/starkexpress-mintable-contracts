@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="index.html">Home</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="src/Greeter.sol/contract.Greeter.html">Greeter</a></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="index.html">Home</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="src/erc721/index.html">❱ erc721</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/erc721/ERC721Mintable.sol/contract.ERC721Mintable.html">ERC721Mintable</a></li><li class="chapter-item "><a href="src/erc721/IERC721Mintable.sol/interface.IERC721Mintable.html">IERC721Mintable</a></li></ol></li><li class="chapter-item "><a href="src/utils/index.html">❱ utils</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/utils/ByteUtils.sol/library.ByteUtils.html">ByteUtils</a></li></ol></li><li class="chapter-item "><a href="src/IMintable.sol/interface.IMintable.html">IMintable</a></li><li class="chapter-item "><a href="src/Mintable.sol/abstract.Mintable.html">Mintable</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -250,55 +250,156 @@ tools on top of.</p>
 <p align="center">
   <img src="https://threesigma.xyz/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fthree-sigma-labs-research-capital-white.0f8e8f50.png&w=2048&q=75" width="75%" />
 </p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="greeter"><a class="header" href="#greeter">Greeter</a></h1>
-<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/5c1c2c2d64c4fee998d268035a9d57c850182edf/src/Greeter.sol">Git Source</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents"><a class="header" href="#contents">Contents</a></h1>
+<ul>
+<li><a href="src/erc721/ERC721Mintable.sol/contract.ERC721Mintable.html">ERC721Mintable</a></li>
+<li><a href="src/erc721/IERC721Mintable.sol/interface.IERC721Mintable.html">IERC721Mintable</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc721mintable"><a class="header" href="#erc721mintable">ERC721Mintable</a></h1>
+<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/dc458c3da3cf7c8f1f33261fcdfde9f274fb50a2/src/erc721/ERC721Mintable.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+ERC721, <a href="src/erc721/ERC721Mintable.sol//src/Mintable.sol/abstract.Mintable.html">Mintable</a>, Ownable, <a href="src/erc721/ERC721Mintable.sol//src/erc721/IERC721Mintable.sol/interface.IERC721Mintable.html">IERC721Mintable</a></p>
 <h2 id="state-variables"><a class="header" href="#state-variables">State Variables</a></h2>
-<h3 id="greeting"><a class="header" href="#greeting">greeting</a></h3>
-<p>The greeting message.</p>
-<pre><code class="language-solidity">string public greeting;
+<h3 id="_uri"><a class="header" href="#_uri">_uri</a></h3>
+<p>The collection's URI.</p>
+<pre><code class="language-solidity">string private _uri;
 </code></pre>
 <h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
 <h3 id="constructor"><a class="header" href="#constructor">constructor</a></h3>
-<p><em>Constructor function that sets the greeting message.</em></p>
-<pre><code class="language-solidity">constructor(string memory newGreeting);
+<p>Constructor for the <code>ERC721Mintable</code> contract.</p>
+<pre><code class="language-solidity">constructor(string memory name_, string memory symbol_, string memory uri_, address starkEx_)
+    ERC721(name_, symbol_)
+    Mintable(starkEx_);
 </code></pre>
 <p><strong>Parameters</strong></p>
 <div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>newGreeting</code></td><td><code>string</code></td><td>The greeting message to be set.</td></tr>
+<tr><td><code>name_</code></td><td><code>string</code></td><td>The collection's name.</td></tr>
+<tr><td><code>symbol_</code></td><td><code>string</code></td><td>The collection's symbol.</td></tr>
+<tr><td><code>uri_</code></td><td><code>string</code></td><td>The collection's URI.</td></tr>
+<tr><td><code>starkEx_</code></td><td><code>address</code></td><td>The StarkEx contract address.</td></tr>
 </tbody></table>
 </div>
-<h3 id="greet"><a class="header" href="#greet">greet</a></h3>
-<p>Function to greet everyone with a given message.</p>
-<pre><code class="language-solidity">function greet(string memory myGm) external returns (string memory greet_);
+<h3 id="supportsinterface"><a class="header" href="#supportsinterface">supportsInterface</a></h3>
+<p><em>See {IERC165-supportsInterface}.</em></p>
+<pre><code class="language-solidity">function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, Mintable, IERC165) returns (bool);
+</code></pre>
+<h3 id="seturi"><a class="header" href="#seturi">setUri</a></h3>
+<p>Sets the URI for this collection.</p>
+<p><em>Only callable by the owner.</em></p>
+<pre><code class="language-solidity">function setUri(string memory uri_) public override onlyOwner;
 </code></pre>
 <p><strong>Parameters</strong></p>
 <div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>myGm</code></td><td><code>string</code></td><td>The message to be used for greeting.</td></tr>
+<tr><td><code>uri_</code></td><td><code>string</code></td><td>The new collection's URI.</td></tr>
+</tbody></table>
+</div>
+<h3 id="mintfor"><a class="header" href="#mintfor">mintFor</a></h3>
+<p><em>Only callable by the StarkEx contract.</em></p>
+<pre><code class="language-solidity">function mintFor(address to_, uint256 amount_, bytes calldata mintingBlob_) external override onlyStarkEx;
+</code></pre>
+<h3 id="_baseuri"><a class="header" href="#_baseuri">_baseURI</a></h3>
+<p><em>See {IERC721Metadata-tokenURI}.</em></p>
+<pre><code class="language-solidity">function _baseURI() internal view override returns (string memory);
+</code></pre>
+<h2 id="events"><a class="header" href="#events">Events</a></h2>
+<h3 id="logseturi"><a class="header" href="#logseturi">LogSetUri</a></h3>
+<p>The collections's URI was set.</p>
+<pre><code class="language-solidity">event LogSetUri(string uri_);
+</code></pre>
+<h3 id="logmintederc721"><a class="header" href="#logmintederc721">LogMintedERC721</a></h3>
+<p>An ERC721 token was minted.</p>
+<pre><code class="language-solidity">event LogMintedERC721(address indexed to_, uint256 tokenId_);
+</code></pre>
+<h2 id="errors"><a class="header" href="#errors">Errors</a></h2>
+<h3 id="invalidmintamounterror"><a class="header" href="#invalidmintamounterror">InvalidMintAmountError</a></h3>
+<p>Thrown when an invalid mint amount is requested.</p>
+<pre><code class="language-solidity">error InvalidMintAmountError();
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ierc721mintable"><a class="header" href="#ierc721mintable">IERC721Mintable</a></h1>
+<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/dc458c3da3cf7c8f1f33261fcdfde9f274fb50a2/src/erc721/IERC721Mintable.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+IERC721, <a href="src/erc721/IERC721Mintable.sol//src/IMintable.sol/interface.IMintable.html">IMintable</a></p>
+<h2 id="functions-1"><a class="header" href="#functions-1">Functions</a></h2>
+<h3 id="seturi-1"><a class="header" href="#seturi-1">setUri</a></h3>
+<p>Sets the URI for this collection.</p>
+<pre><code class="language-solidity">function setUri(string memory uri_) external;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>uri_</code></td><td><code>string</code></td><td>The new collection's URI.</td></tr>
+</tbody></table>
+</div>
+<h2 id="events-1"><a class="header" href="#events-1">Events</a></h2>
+<h3 id="minted"><a class="header" href="#minted">Minted</a></h3>
+<p><em>Emitted when a new asset is minted.</em></p>
+<pre><code class="language-solidity">event Minted(address to_, uint256 id_);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-1"><a class="header" href="#contents-1">Contents</a></h1>
+<ul>
+<li><a href="src/utils/ByteUtils.sol/library.ByteUtils.html">ByteUtils</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="byteutils"><a class="header" href="#byteutils">ByteUtils</a></h1>
+<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/dc458c3da3cf7c8f1f33261fcdfde9f274fb50a2/src/utils/ByteUtils.sol">Git Source</a></p>
+<p>Library for byte array manipulation.</p>
+<h2 id="functions-2"><a class="header" href="#functions-2">Functions</a></h2>
+<h3 id="touint256"><a class="header" href="#touint256">toUint256</a></h3>
+<p>Converts a slice of bytes into a uint256.</p>
+<p><em><code>_bytes</code> must have a length of at least <code>(_start + 32)</code> bytes.</em></p>
+<pre><code class="language-solidity">function toUint256(bytes memory _bytes, uint256 _start) internal pure returns (uint256);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_bytes</code></td><td><code>bytes</code></td><td>The bytes to be converted.</td></tr>
+<tr><td><code>_start</code></td><td><code>uint256</code></td><td>The starting index of the slice.</td></tr>
 </tbody></table>
 </div>
 <p><strong>Returns</strong></p>
 <div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>greet_</code></td><td><code>string</code></td><td>The message used for greeting.</td></tr>
+<tr><td><code>&lt;none&gt;</code></td><td><code>uint256</code></td><td>The converted uint256 value.</td></tr>
 </tbody></table>
-</div>
-<h3 id="setgreeting"><a class="header" href="#setgreeting">setGreeting</a></h3>
-<p>Sets the greeting message.</p>
-<pre><code class="language-solidity">function setGreeting(string memory newGreeting) external;
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="imintable"><a class="header" href="#imintable">IMintable</a></h1>
+<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/dc458c3da3cf7c8f1f33261fcdfde9f274fb50a2/src/IMintable.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+IERC165</p>
+<h2 id="functions-3"><a class="header" href="#functions-3">Functions</a></h2>
+<h3 id="mintfor-1"><a class="header" href="#mintfor-1">mintFor</a></h3>
+<pre><code class="language-solidity">function mintFor(address to_, uint256 amount_, bytes calldata mintingBlob_) external;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mintable"><a class="header" href="#mintable">Mintable</a></h1>
+<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/dc458c3da3cf7c8f1f33261fcdfde9f274fb50a2/src/Mintable.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+ERC165, <a href="src/Mintable.sol//src/IMintable.sol/interface.IMintable.html">IMintable</a></p>
+<h2 id="state-variables-1"><a class="header" href="#state-variables-1">State Variables</a></h2>
+<h3 id="starkex"><a class="header" href="#starkex">starkEx</a></h3>
+<p>The StarkEx contract address.</p>
+<pre><code class="language-solidity">address public immutable starkEx;
+</code></pre>
+<h2 id="functions-4"><a class="header" href="#functions-4">Functions</a></h2>
+<h3 id="onlystarkex"><a class="header" href="#onlystarkex">onlyStarkEx</a></h3>
+<p>Throws if called by any account other than the StarkEx contract.</p>
+<pre><code class="language-solidity">modifier onlyStarkEx();
+</code></pre>
+<h3 id="constructor-1"><a class="header" href="#constructor-1">constructor</a></h3>
+<p>Constructor for the <code>Mintable</code> contract.</p>
+<pre><code class="language-solidity">constructor(address starkEx_);
 </code></pre>
 <p><strong>Parameters</strong></p>
 <div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>newGreeting</code></td><td><code>string</code></td><td>The new greeting message.</td></tr>
+<tr><td><code>starkEx_</code></td><td><code>address</code></td><td>The StarkEx contract address.</td></tr>
 </tbody></table>
 </div>
-<h2 id="events"><a class="header" href="#events">Events</a></h2>
-<h3 id="loggreet"><a class="header" href="#loggreet">LogGreet</a></h3>
-<p>Emitted when upon a valid greet.</p>
-<pre><code class="language-solidity">event LogGreet();
+<h3 id="supportsinterface-1"><a class="header" href="#supportsinterface-1">supportsInterface</a></h3>
+<p><em>See {IERC165-supportsInterface}.</em></p>
+<pre><code class="language-solidity">function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165, IERC165) returns (bool);
 </code></pre>
-<h2 id="errors"><a class="header" href="#errors">Errors</a></h2>
-<h3 id="badgmerror"><a class="header" href="#badgmerror">BadGmError</a></h3>
-<p>Thrown when a bad greet is requested.</p>
-<pre><code class="language-solidity">error BadGmError();
+<h2 id="errors-1"><a class="header" href="#errors-1">Errors</a></h2>
+<h3 id="notauthorizederror"><a class="header" href="#notauthorizederror">NotAuthorizedError</a></h3>
+<p>An unauthorized operation was requested.</p>
+<pre><code class="language-solidity">error NotAuthorizedError();
+</code></pre>
+<h3 id="zerovalueerror"><a class="header" href="#zerovalueerror">ZeroValueError</a></h3>
+<p>An argument with a non-zero value is passed as zero.</p>
+<pre><code class="language-solidity">error ZeroValueError();
 </code></pre>
 
                     </main>
