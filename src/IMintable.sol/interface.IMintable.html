@@ -146,14 +146,24 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="imintable"><a class="header" href="#imintable">IMintable</a></h1>
-<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/583dfcd7545a43ae565f8723677b3d6b5649c0b3/src/IMintable.sol">Git Source</a></p>
+<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/17f31cfbb3abe8c076da1d38ec7f7884167088e8/src/IMintable.sol">Git Source</a></p>
 <p><strong>Inherits:</strong>
 IERC165</p>
+<p><strong>Author:</strong>
+StarkExpress Team</p>
+<p>Interface for mintable StarkExpress tokens.</p>
 <h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
 <h3 id="mintfor"><a class="header" href="#mintfor">mintFor</a></h3>
+<p>Mints tokens to a specified address.</p>
 <pre><code class="language-solidity">function mintFor(address to_, uint256 amount_, bytes calldata mintingBlob_) external;
 </code></pre>
-
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>to_</code></td><td><code>address</code></td><td>The address that will receive the minted tokens.</td></tr>
+<tr><td><code>amount_</code></td><td><code>uint256</code></td><td>The amount of tokens to mint.</td></tr>
+<tr><td><code>mintingBlob_</code></td><td><code>bytes</code></td><td>Additional data needed for the minting process.</td></tr>
+</tbody></table>
+</div>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
