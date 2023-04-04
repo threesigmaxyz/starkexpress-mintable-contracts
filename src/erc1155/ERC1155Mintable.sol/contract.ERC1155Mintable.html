@@ -33,6 +33,7 @@
 
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "../../../";
@@ -70,10 +71,12 @@
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -81,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="../../../index.html">Home</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item expanded "><a href="../../../src/erc1155/index.html">❱ erc1155</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../src/erc1155/ERC1155Mintable.sol/contract.ERC1155Mintable.html" class="active">ERC1155Mintable</a></li><li class="chapter-item "><a href="../../../src/erc1155/IERC1155Mintable.sol/interface.IERC1155Mintable.html">IERC1155Mintable</a></li></ol></li><li class="chapter-item "><a href="../../../src/erc20/index.html">❱ erc20</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/erc20/ERC20Mintable.sol/contract.ERC20Mintable.html">ERC20Mintable</a></li><li class="chapter-item "><a href="../../../src/erc20/IERC20Mintable.sol/interface.IERC20Mintable.html">IERC20Mintable</a></li></ol></li><li class="chapter-item "><a href="../../../src/erc721/index.html">❱ erc721</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/erc721/ERC721Mintable.sol/contract.ERC721Mintable.html">ERC721Mintable</a></li><li class="chapter-item "><a href="../../../src/erc721/IERC721Mintable.sol/interface.IERC721Mintable.html">IERC721Mintable</a></li></ol></li><li class="chapter-item "><a href="../../../src/utils/index.html">❱ utils</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/utils/ByteUtils.sol/library.ByteUtils.html">ByteUtils</a></li></ol></li><li class="chapter-item "><a href="../../../src/IMintable.sol/interface.IMintable.html">IMintable</a></li><li class="chapter-item "><a href="../../../src/Mintable.sol/abstract.Mintable.html">Mintable</a></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="../../../index.html">Home</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="../../../src/core/index.html">❱ core</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/core/IMintable.sol/interface.IMintable.html">IMintable</a></li><li class="chapter-item "><a href="../../../src/core/Mintable.sol/abstract.Mintable.html">Mintable</a></li></ol></li><li class="chapter-item expanded "><a href="../../../src/erc1155/index.html">❱ erc1155</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../src/erc1155/ERC1155Mintable.sol/contract.ERC1155Mintable.html" class="active">ERC1155Mintable</a></li></ol></li><li class="chapter-item "><a href="../../../src/erc20/index.html">❱ erc20</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/erc20/ERC20Mintable.sol/contract.ERC20Mintable.html">ERC20Mintable</a></li></ol></li><li class="chapter-item "><a href="../../../src/erc721/index.html">❱ erc721</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/erc721/ERC721Mintable.sol/contract.ERC721Mintable.html">ERC721Mintable</a></li></ol></li><li class="chapter-item "><a href="../../../src/utils/index.html">❱ utils</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/utils/ByteUtils.sol/library.ByteUtils.html">ByteUtils</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,9 +149,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="erc1155mintable"><a class="header" href="#erc1155mintable">ERC1155Mintable</a></h1>
-<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/19da87a17659f402b125b2af0f91f83f8fd63de7/src/erc1155/ERC1155Mintable.sol">Git Source</a></p>
+<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/07a37e020f9da35e6453f48544b4cea4732dd0f6/src/erc1155/ERC1155Mintable.sol">Git Source</a></p>
 <p><strong>Inherits:</strong>
-ERC1155, <a href="/src/Mintable.sol/abstract.Mintable.html">Mintable</a>, Ownable, <a href="/src/erc1155/IERC1155Mintable.sol/interface.IERC1155Mintable.html">IERC1155Mintable</a></p>
+ERC1155, <a href="/src/core/Mintable.sol/abstract.Mintable.html">Mintable</a>, Ownable</p>
+<p><strong>Author:</strong>
+StarkExpress Team</p>
+<p>Base implementation for StarkExpress ERC-1155 mintable tokens.</p>
 <h2 id="state-variables"><a class="header" href="#state-variables">State Variables</a></h2>
 <h3 id="name"><a class="header" href="#name">name</a></h3>
 <p>The token's name.</p>
@@ -175,17 +181,12 @@ ERC1155, <a href="/src/Mintable.sol/abstract.Mintable.html">Mintable</a>, Ownabl
 </div>
 <h3 id="supportsinterface"><a class="header" href="#supportsinterface">supportsInterface</a></h3>
 <p><em>See {IERC165-supportsInterface}.</em></p>
-<pre><code class="language-solidity">function supportsInterface(bytes4 interfaceId)
-    public
-    view
-    virtual
-    override(ERC1155, Mintable, IERC165)
-    returns (bool);
+<pre><code class="language-solidity">function supportsInterface(bytes4 interfaceId) public view virtual override(ERC1155, Mintable) returns (bool);
 </code></pre>
 <h3 id="seturi"><a class="header" href="#seturi">setUri</a></h3>
 <p>Sets the token's URI.</p>
 <p><em>Only callable by the owner.</em></p>
-<pre><code class="language-solidity">function setUri(string memory uri_) public override onlyOwner;
+<pre><code class="language-solidity">function setUri(string memory uri_) public onlyOwner;
 </code></pre>
 <p><strong>Parameters</strong></p>
 <div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
@@ -193,8 +194,25 @@ ERC1155, <a href="/src/Mintable.sol/abstract.Mintable.html">Mintable</a>, Ownabl
 </tbody></table>
 </div>
 <h3 id="mintfor"><a class="header" href="#mintfor">mintFor</a></h3>
+<p>Mints tokens to a specified address.</p>
 <p><em>Only callable by the StarkEx contract.</em></p>
 <pre><code class="language-solidity">function mintFor(address to_, uint256 amount_, bytes calldata mintingBlob_) external override onlyStarkEx;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>to_</code></td><td><code>address</code></td><td>The address that will receive the minted tokens.</td></tr>
+<tr><td><code>amount_</code></td><td><code>uint256</code></td><td>The amount of tokens to mint.</td></tr>
+<tr><td><code>mintingBlob_</code></td><td><code>bytes</code></td><td>Additional data needed for the minting process.</td></tr>
+</tbody></table>
+</div>
+<h2 id="events"><a class="header" href="#events">Events</a></h2>
+<h3 id="logseturi"><a class="header" href="#logseturi">LogSetUri</a></h3>
+<p>Emitted when the token' URI is set.</p>
+<pre><code class="language-solidity">event LogSetUri(string uri_);
+</code></pre>
+<h3 id="logmintederc1155"><a class="header" href="#logmintederc1155">LogMintedERC1155</a></h3>
+<p>Emitted when ERC1155 tokens are minted.</p>
+<pre><code class="language-solidity">event LogMintedERC1155(address indexed to_, uint256 tokenId_, uint256 amount_);
 </code></pre>
 <h2 id="errors"><a class="header" href="#errors">Errors</a></h2>
 <h3 id="invalidmintamounterror"><a class="header" href="#invalidmintamounterror">InvalidMintAmountError</a></h3>
@@ -210,7 +228,7 @@ ERC1155, <a href="/src/Mintable.sol/abstract.Mintable.html">Mintable</a>, Ownabl
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../../../src/erc1155/IERC1155Mintable.sol/interface.IERC1155Mintable.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../../../src/erc20/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -224,7 +242,7 @@ ERC1155, <a href="/src/Mintable.sol/abstract.Mintable.html">Mintable</a>, Ownabl
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../../../src/erc1155/IERC1155Mintable.sol/interface.IERC1155Mintable.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../../../src/erc20/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
@@ -251,5 +269,6 @@ ERC1155, <a href="/src/Mintable.sol/abstract.Mintable.html">Mintable</a>, Ownabl
         <script src="../../../solidity.min.js"></script>
 
 
+    </div>
     </body>
 </html>

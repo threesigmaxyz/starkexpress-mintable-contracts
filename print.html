@@ -34,6 +34,7 @@
 
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "";
@@ -71,10 +72,12 @@
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -82,7 +85,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="index.html">Home</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="src/erc1155/index.html">❱ erc1155</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/erc1155/ERC1155Mintable.sol/contract.ERC1155Mintable.html">ERC1155Mintable</a></li><li class="chapter-item "><a href="src/erc1155/IERC1155Mintable.sol/interface.IERC1155Mintable.html">IERC1155Mintable</a></li></ol></li><li class="chapter-item "><a href="src/erc20/index.html">❱ erc20</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/erc20/ERC20Mintable.sol/contract.ERC20Mintable.html">ERC20Mintable</a></li><li class="chapter-item "><a href="src/erc20/IERC20Mintable.sol/interface.IERC20Mintable.html">IERC20Mintable</a></li></ol></li><li class="chapter-item "><a href="src/erc721/index.html">❱ erc721</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/erc721/ERC721Mintable.sol/contract.ERC721Mintable.html">ERC721Mintable</a></li><li class="chapter-item "><a href="src/erc721/IERC721Mintable.sol/interface.IERC721Mintable.html">IERC721Mintable</a></li></ol></li><li class="chapter-item "><a href="src/utils/index.html">❱ utils</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/utils/ByteUtils.sol/library.ByteUtils.html">ByteUtils</a></li></ol></li><li class="chapter-item "><a href="src/IMintable.sol/interface.IMintable.html">IMintable</a></li><li class="chapter-item "><a href="src/Mintable.sol/abstract.Mintable.html">Mintable</a></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="index.html">Home</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="src/core/index.html">❱ core</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/core/IMintable.sol/interface.IMintable.html">IMintable</a></li><li class="chapter-item "><a href="src/core/Mintable.sol/abstract.Mintable.html">Mintable</a></li></ol></li><li class="chapter-item "><a href="src/erc1155/index.html">❱ erc1155</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/erc1155/ERC1155Mintable.sol/contract.ERC1155Mintable.html">ERC1155Mintable</a></li></ol></li><li class="chapter-item "><a href="src/erc20/index.html">❱ erc20</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/erc20/ERC20Mintable.sol/contract.ERC20Mintable.html">ERC20Mintable</a></li></ol></li><li class="chapter-item "><a href="src/erc721/index.html">❱ erc721</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/erc721/ERC721Mintable.sol/contract.ERC721Mintable.html">ERC721Mintable</a></li></ol></li><li class="chapter-item "><a href="src/utils/index.html">❱ utils</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/utils/ByteUtils.sol/library.ByteUtils.html">ByteUtils</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -215,14 +218,79 @@ Additionaly, if you need testnet ETH for the deployment you can request it from 
 </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="contents"><a class="header" href="#contents">Contents</a></h1>
 <ul>
+<li><a href="src/core/IMintable.sol/interface.IMintable.html">IMintable</a></li>
+<li><a href="src/core/Mintable.sol/abstract.Mintable.html">Mintable</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="imintable"><a class="header" href="#imintable">IMintable</a></h1>
+<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/07a37e020f9da35e6453f48544b4cea4732dd0f6/src/core/IMintable.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+IERC165</p>
+<p><strong>Author:</strong>
+StarkExpress Team</p>
+<p>Interface for mintable StarkExpress tokens.</p>
+<h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
+<h3 id="mintfor"><a class="header" href="#mintfor">mintFor</a></h3>
+<p>Mints tokens to a specified address.</p>
+<pre><code class="language-solidity">function mintFor(address to_, uint256 amount_, bytes calldata mintingBlob_) external;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>to_</code></td><td><code>address</code></td><td>The address that will receive the minted tokens.</td></tr>
+<tr><td><code>amount_</code></td><td><code>uint256</code></td><td>The amount of tokens to mint.</td></tr>
+<tr><td><code>mintingBlob_</code></td><td><code>bytes</code></td><td>Additional data needed for the minting process.</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="mintable"><a class="header" href="#mintable">Mintable</a></h1>
+<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/07a37e020f9da35e6453f48544b4cea4732dd0f6/src/core/Mintable.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+ERC165, <a href="src/core/Mintable.sol//src/core/IMintable.sol/interface.IMintable.html">IMintable</a></p>
+<p><strong>Author:</strong>
+StarkExpress Team</p>
+<p>Base abstract class for mintable StarkExpress tokens.</p>
+<p><em>All mintable assets in the StarkExpress platform must extend this class.</em></p>
+<h2 id="state-variables"><a class="header" href="#state-variables">State Variables</a></h2>
+<h3 id="starkex"><a class="header" href="#starkex">starkEx</a></h3>
+<p>The StarkEx contract address.</p>
+<pre><code class="language-solidity">address public immutable starkEx;
+</code></pre>
+<h2 id="functions-1"><a class="header" href="#functions-1">Functions</a></h2>
+<h3 id="onlystarkex"><a class="header" href="#onlystarkex">onlyStarkEx</a></h3>
+<p>Throws if called by any account other than the StarkEx contract.</p>
+<pre><code class="language-solidity">modifier onlyStarkEx();
+</code></pre>
+<h3 id="constructor"><a class="header" href="#constructor">constructor</a></h3>
+<p>Constructor for the <code>Mintable</code> contract.</p>
+<pre><code class="language-solidity">constructor(address starkEx_);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>starkEx_</code></td><td><code>address</code></td><td>The StarkEx contract address.</td></tr>
+</tbody></table>
+</div>
+<h3 id="supportsinterface"><a class="header" href="#supportsinterface">supportsInterface</a></h3>
+<p><em>See {IERC165-supportsInterface}.</em></p>
+<pre><code class="language-solidity">function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165, IERC165) returns (bool);
+</code></pre>
+<h2 id="errors"><a class="header" href="#errors">Errors</a></h2>
+<h3 id="notauthorizederror"><a class="header" href="#notauthorizederror">NotAuthorizedError</a></h3>
+<p>An unauthorized operation was requested.</p>
+<pre><code class="language-solidity">error NotAuthorizedError();
+</code></pre>
+<h3 id="zerovalueerror"><a class="header" href="#zerovalueerror">ZeroValueError</a></h3>
+<p>An argument with a non-zero value is passed as zero.</p>
+<pre><code class="language-solidity">error ZeroValueError();
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-1"><a class="header" href="#contents-1">Contents</a></h1>
+<ul>
 <li><a href="src/erc1155/ERC1155Mintable.sol/contract.ERC1155Mintable.html">ERC1155Mintable</a></li>
-<li><a href="src/erc1155/IERC1155Mintable.sol/interface.IERC1155Mintable.html">IERC1155Mintable</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="erc1155mintable"><a class="header" href="#erc1155mintable">ERC1155Mintable</a></h1>
-<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/19da87a17659f402b125b2af0f91f83f8fd63de7/src/erc1155/ERC1155Mintable.sol">Git Source</a></p>
+<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/07a37e020f9da35e6453f48544b4cea4732dd0f6/src/erc1155/ERC1155Mintable.sol">Git Source</a></p>
 <p><strong>Inherits:</strong>
-ERC1155, <a href="src/erc1155/ERC1155Mintable.sol//src/Mintable.sol/abstract.Mintable.html">Mintable</a>, Ownable, <a href="src/erc1155/ERC1155Mintable.sol//src/erc1155/IERC1155Mintable.sol/interface.IERC1155Mintable.html">IERC1155Mintable</a></p>
-<h2 id="state-variables"><a class="header" href="#state-variables">State Variables</a></h2>
+ERC1155, <a href="src/erc1155/ERC1155Mintable.sol//src/core/Mintable.sol/abstract.Mintable.html">Mintable</a>, Ownable</p>
+<p><strong>Author:</strong>
+StarkExpress Team</p>
+<p>Base implementation for StarkExpress ERC-1155 mintable tokens.</p>
+<h2 id="state-variables-1"><a class="header" href="#state-variables-1">State Variables</a></h2>
 <h3 id="name"><a class="header" href="#name">name</a></h3>
 <p>The token's name.</p>
 <pre><code class="language-solidity">string public name;
@@ -231,8 +299,8 @@ ERC1155, <a href="src/erc1155/ERC1155Mintable.sol//src/Mintable.sol/abstract.Min
 <p>The token's symbol.</p>
 <pre><code class="language-solidity">string public symbol;
 </code></pre>
-<h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
-<h3 id="constructor"><a class="header" href="#constructor">constructor</a></h3>
+<h2 id="functions-2"><a class="header" href="#functions-2">Functions</a></h2>
+<h3 id="constructor-1"><a class="header" href="#constructor-1">constructor</a></h3>
 <p>Constructor for the <code>ERC1155Mintable</code> contract.</p>
 <pre><code class="language-solidity">constructor(string memory name_, string memory symbol_, string memory uri_, address starkEx_)
     ERC1155(uri_)
@@ -246,46 +314,30 @@ ERC1155, <a href="src/erc1155/ERC1155Mintable.sol//src/Mintable.sol/abstract.Min
 <tr><td><code>starkEx_</code></td><td><code>address</code></td><td>The StarkEx contract address.</td></tr>
 </tbody></table>
 </div>
-<h3 id="supportsinterface"><a class="header" href="#supportsinterface">supportsInterface</a></h3>
+<h3 id="supportsinterface-1"><a class="header" href="#supportsinterface-1">supportsInterface</a></h3>
 <p><em>See {IERC165-supportsInterface}.</em></p>
-<pre><code class="language-solidity">function supportsInterface(bytes4 interfaceId)
-    public
-    view
-    virtual
-    override(ERC1155, Mintable, IERC165)
-    returns (bool);
+<pre><code class="language-solidity">function supportsInterface(bytes4 interfaceId) public view virtual override(ERC1155, Mintable) returns (bool);
 </code></pre>
 <h3 id="seturi"><a class="header" href="#seturi">setUri</a></h3>
 <p>Sets the token's URI.</p>
 <p><em>Only callable by the owner.</em></p>
-<pre><code class="language-solidity">function setUri(string memory uri_) public override onlyOwner;
+<pre><code class="language-solidity">function setUri(string memory uri_) public onlyOwner;
 </code></pre>
 <p><strong>Parameters</strong></p>
 <div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>uri_</code></td><td><code>string</code></td><td>The new token URI.</td></tr>
 </tbody></table>
 </div>
-<h3 id="mintfor"><a class="header" href="#mintfor">mintFor</a></h3>
+<h3 id="mintfor-1"><a class="header" href="#mintfor-1">mintFor</a></h3>
+<p>Mints tokens to a specified address.</p>
 <p><em>Only callable by the StarkEx contract.</em></p>
 <pre><code class="language-solidity">function mintFor(address to_, uint256 amount_, bytes calldata mintingBlob_) external override onlyStarkEx;
 </code></pre>
-<h2 id="errors"><a class="header" href="#errors">Errors</a></h2>
-<h3 id="invalidmintamounterror"><a class="header" href="#invalidmintamounterror">InvalidMintAmountError</a></h3>
-<p>Thrown when an invalid mint amount is requested.</p>
-<pre><code class="language-solidity">error InvalidMintAmountError();
-</code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="ierc1155mintable"><a class="header" href="#ierc1155mintable">IERC1155Mintable</a></h1>
-<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/19da87a17659f402b125b2af0f91f83f8fd63de7/src/erc1155/IERC1155Mintable.sol">Git Source</a></p>
-<p><strong>Inherits:</strong>
-IERC1155, <a href="src/erc1155/IERC1155Mintable.sol//src/IMintable.sol/interface.IMintable.html">IMintable</a></p>
-<h2 id="functions-1"><a class="header" href="#functions-1">Functions</a></h2>
-<h3 id="seturi-1"><a class="header" href="#seturi-1">setUri</a></h3>
-<p>Sets the token's URI.</p>
-<pre><code class="language-solidity">function setUri(string memory uri_) external;
-</code></pre>
 <p><strong>Parameters</strong></p>
 <div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>uri_</code></td><td><code>string</code></td><td>The new token URI.</td></tr>
+<tr><td><code>to_</code></td><td><code>address</code></td><td>The address that will receive the minted tokens.</td></tr>
+<tr><td><code>amount_</code></td><td><code>uint256</code></td><td>The amount of tokens to mint.</td></tr>
+<tr><td><code>mintingBlob_</code></td><td><code>bytes</code></td><td>Additional data needed for the minting process.</td></tr>
 </tbody></table>
 </div>
 <h2 id="events"><a class="header" href="#events">Events</a></h2>
@@ -297,17 +349,24 @@ IERC1155, <a href="src/erc1155/IERC1155Mintable.sol//src/IMintable.sol/interface
 <p>Emitted when ERC1155 tokens are minted.</p>
 <pre><code class="language-solidity">event LogMintedERC1155(address indexed to_, uint256 tokenId_, uint256 amount_);
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-1"><a class="header" href="#contents-1">Contents</a></h1>
+<h2 id="errors-1"><a class="header" href="#errors-1">Errors</a></h2>
+<h3 id="invalidmintamounterror"><a class="header" href="#invalidmintamounterror">InvalidMintAmountError</a></h3>
+<p>Thrown when an invalid mint amount is requested.</p>
+<pre><code class="language-solidity">error InvalidMintAmountError();
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-2"><a class="header" href="#contents-2">Contents</a></h1>
 <ul>
 <li><a href="src/erc20/ERC20Mintable.sol/contract.ERC20Mintable.html">ERC20Mintable</a></li>
-<li><a href="src/erc20/IERC20Mintable.sol/interface.IERC20Mintable.html">IERC20Mintable</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="erc20mintable"><a class="header" href="#erc20mintable">ERC20Mintable</a></h1>
-<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/19da87a17659f402b125b2af0f91f83f8fd63de7/src/erc20/ERC20Mintable.sol">Git Source</a></p>
+<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/07a37e020f9da35e6453f48544b4cea4732dd0f6/src/erc20/ERC20Mintable.sol">Git Source</a></p>
 <p><strong>Inherits:</strong>
-ERC20, <a href="src/erc20/ERC20Mintable.sol//src/Mintable.sol/abstract.Mintable.html">Mintable</a>, <a href="src/erc20/ERC20Mintable.sol//src/erc20/IERC20Mintable.sol/interface.IERC20Mintable.html">IERC20Mintable</a></p>
-<h2 id="functions-2"><a class="header" href="#functions-2">Functions</a></h2>
-<h3 id="constructor-1"><a class="header" href="#constructor-1">constructor</a></h3>
+ERC20, <a href="src/erc20/ERC20Mintable.sol//src/core/Mintable.sol/abstract.Mintable.html">Mintable</a></p>
+<p><strong>Author:</strong>
+StarkExpress Team</p>
+<p>Base implementation for StarkExpress ERC-20 mintable tokens.</p>
+<h2 id="functions-3"><a class="header" href="#functions-3">Functions</a></h2>
+<h3 id="constructor-2"><a class="header" href="#constructor-2">constructor</a></h3>
 <p>Constructor for the <code>ERC20Mintable</code> contract.</p>
 <pre><code class="language-solidity">constructor(string memory name_, string memory symbol_, address starkEx_) ERC20(name_, symbol_) Mintable(starkEx_);
 </code></pre>
@@ -318,39 +377,46 @@ ERC20, <a href="src/erc20/ERC20Mintable.sol//src/Mintable.sol/abstract.Mintable.
 <tr><td><code>starkEx_</code></td><td><code>address</code></td><td>The StarkEx contract address.</td></tr>
 </tbody></table>
 </div>
-<h3 id="mintfor-1"><a class="header" href="#mintfor-1">mintFor</a></h3>
+<h3 id="mintfor-2"><a class="header" href="#mintfor-2">mintFor</a></h3>
+<p>Mints tokens to a specified address.</p>
+<p><em>Only callable by the StarkEx contract.</em></p>
 <pre><code class="language-solidity">function mintFor(address to_, uint256 amount_, bytes calldata) external override onlyStarkEx;
 </code></pre>
-<h2 id="errors-1"><a class="header" href="#errors-1">Errors</a></h2>
-<h3 id="invalidmintamounterror-1"><a class="header" href="#invalidmintamounterror-1">InvalidMintAmountError</a></h3>
-<p>Thrown when an invalid mint amount is requested.</p>
-<pre><code class="language-solidity">error InvalidMintAmountError();
-</code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="ierc20mintable"><a class="header" href="#ierc20mintable">IERC20Mintable</a></h1>
-<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/19da87a17659f402b125b2af0f91f83f8fd63de7/src/erc20/IERC20Mintable.sol">Git Source</a></p>
-<p><strong>Inherits:</strong>
-IERC20, <a href="src/erc20/IERC20Mintable.sol//src/IMintable.sol/interface.IMintable.html">IMintable</a></p>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>to_</code></td><td><code>address</code></td><td>The address that will receive the minted tokens.</td></tr>
+<tr><td><code>amount_</code></td><td><code>uint256</code></td><td>The amount of tokens to mint.</td></tr>
+<tr><td><code>&lt;none&gt;</code></td><td><code>bytes</code></td><td></td></tr>
+</tbody></table>
+</div>
 <h2 id="events-1"><a class="header" href="#events-1">Events</a></h2>
 <h3 id="logmintederc20"><a class="header" href="#logmintederc20">LogMintedERC20</a></h3>
 <p>Emitted when ERC20 tokens are minted.</p>
 <pre><code class="language-solidity">event LogMintedERC20(address indexed to_, uint256 amount_);
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-2"><a class="header" href="#contents-2">Contents</a></h1>
+<h2 id="errors-2"><a class="header" href="#errors-2">Errors</a></h2>
+<h3 id="invalidmintamounterror-1"><a class="header" href="#invalidmintamounterror-1">InvalidMintAmountError</a></h3>
+<p>Thrown when an invalid mint amount is requested.</p>
+<pre><code class="language-solidity">error InvalidMintAmountError();
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-3"><a class="header" href="#contents-3">Contents</a></h1>
 <ul>
 <li><a href="src/erc721/ERC721Mintable.sol/contract.ERC721Mintable.html">ERC721Mintable</a></li>
-<li><a href="src/erc721/IERC721Mintable.sol/interface.IERC721Mintable.html">IERC721Mintable</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="erc721mintable"><a class="header" href="#erc721mintable">ERC721Mintable</a></h1>
-<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/19da87a17659f402b125b2af0f91f83f8fd63de7/src/erc721/ERC721Mintable.sol">Git Source</a></p>
+<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/07a37e020f9da35e6453f48544b4cea4732dd0f6/src/erc721/ERC721Mintable.sol">Git Source</a></p>
 <p><strong>Inherits:</strong>
-ERC721, <a href="src/erc721/ERC721Mintable.sol//src/Mintable.sol/abstract.Mintable.html">Mintable</a>, Ownable, <a href="src/erc721/ERC721Mintable.sol//src/erc721/IERC721Mintable.sol/interface.IERC721Mintable.html">IERC721Mintable</a></p>
-<h2 id="state-variables-1"><a class="header" href="#state-variables-1">State Variables</a></h2>
+ERC721, <a href="src/erc721/ERC721Mintable.sol//src/core/Mintable.sol/abstract.Mintable.html">Mintable</a>, Ownable</p>
+<p><strong>Author:</strong>
+StarkExpress Team</p>
+<p>Base implementation for StarkExpress ERC-721 mintable tokens.</p>
+<h2 id="state-variables-2"><a class="header" href="#state-variables-2">State Variables</a></h2>
 <h3 id="_uri"><a class="header" href="#_uri">_uri</a></h3>
 <p>The token's URI.</p>
 <pre><code class="language-solidity">string private _uri;
 </code></pre>
-<h2 id="functions-3"><a class="header" href="#functions-3">Functions</a></h2>
-<h3 id="constructor-2"><a class="header" href="#constructor-2">constructor</a></h3>
+<h2 id="functions-4"><a class="header" href="#functions-4">Functions</a></h2>
+<h3 id="constructor-3"><a class="header" href="#constructor-3">constructor</a></h3>
 <p>Constructor for the <code>ERC721Mintable</code> contract.</p>
 <pre><code class="language-solidity">constructor(string memory name_, string memory symbol_, string memory uri_, address starkEx_)
     ERC721(name_, symbol_)
@@ -364,47 +430,36 @@ ERC721, <a href="src/erc721/ERC721Mintable.sol//src/Mintable.sol/abstract.Mintab
 <tr><td><code>starkEx_</code></td><td><code>address</code></td><td>The StarkEx contract address.</td></tr>
 </tbody></table>
 </div>
-<h3 id="supportsinterface-1"><a class="header" href="#supportsinterface-1">supportsInterface</a></h3>
+<h3 id="supportsinterface-2"><a class="header" href="#supportsinterface-2">supportsInterface</a></h3>
 <p><em>See {IERC165-supportsInterface}.</em></p>
-<pre><code class="language-solidity">function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, Mintable, IERC165) returns (bool);
+<pre><code class="language-solidity">function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, Mintable) returns (bool);
 </code></pre>
-<h3 id="seturi-2"><a class="header" href="#seturi-2">setUri</a></h3>
+<h3 id="seturi-1"><a class="header" href="#seturi-1">setUri</a></h3>
 <p>Sets the token's URI.</p>
 <p><em>Only callable by the owner.</em></p>
-<pre><code class="language-solidity">function setUri(string memory uri_) public override onlyOwner;
+<pre><code class="language-solidity">function setUri(string memory uri_) public onlyOwner;
 </code></pre>
 <p><strong>Parameters</strong></p>
 <div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>uri_</code></td><td><code>string</code></td><td>The new token URI.</td></tr>
 </tbody></table>
 </div>
-<h3 id="mintfor-2"><a class="header" href="#mintfor-2">mintFor</a></h3>
+<h3 id="mintfor-3"><a class="header" href="#mintfor-3">mintFor</a></h3>
+<p>Mints tokens to a specified address.</p>
 <p><em>Only callable by the StarkEx contract.</em></p>
 <pre><code class="language-solidity">function mintFor(address to_, uint256 amount_, bytes calldata mintingBlob_) external override onlyStarkEx;
 </code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>to_</code></td><td><code>address</code></td><td>The address that will receive the minted tokens.</td></tr>
+<tr><td><code>amount_</code></td><td><code>uint256</code></td><td>The amount of tokens to mint.</td></tr>
+<tr><td><code>mintingBlob_</code></td><td><code>bytes</code></td><td>Additional data needed for the minting process.</td></tr>
+</tbody></table>
+</div>
 <h3 id="_baseuri"><a class="header" href="#_baseuri">_baseURI</a></h3>
 <p><em>See {IERC721Metadata-tokenURI}.</em></p>
 <pre><code class="language-solidity">function _baseURI() internal view override returns (string memory);
 </code></pre>
-<h2 id="errors-2"><a class="header" href="#errors-2">Errors</a></h2>
-<h3 id="invalidmintamounterror-2"><a class="header" href="#invalidmintamounterror-2">InvalidMintAmountError</a></h3>
-<p>Thrown when an invalid mint amount is requested.</p>
-<pre><code class="language-solidity">error InvalidMintAmountError();
-</code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="ierc721mintable"><a class="header" href="#ierc721mintable">IERC721Mintable</a></h1>
-<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/19da87a17659f402b125b2af0f91f83f8fd63de7/src/erc721/IERC721Mintable.sol">Git Source</a></p>
-<p><strong>Inherits:</strong>
-IERC721, <a href="src/erc721/IERC721Mintable.sol//src/IMintable.sol/interface.IMintable.html">IMintable</a></p>
-<h2 id="functions-4"><a class="header" href="#functions-4">Functions</a></h2>
-<h3 id="seturi-3"><a class="header" href="#seturi-3">setUri</a></h3>
-<p>Sets the token's URI.</p>
-<pre><code class="language-solidity">function setUri(string memory uri_) external;
-</code></pre>
-<p><strong>Parameters</strong></p>
-<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>uri_</code></td><td><code>string</code></td><td>The new token URI.</td></tr>
-</tbody></table>
-</div>
 <h2 id="events-2"><a class="header" href="#events-2">Events</a></h2>
 <h3 id="logseturi-1"><a class="header" href="#logseturi-1">LogSetUri</a></h3>
 <p>Emitted when the token's URI is set.</p>
@@ -414,12 +469,17 @@ IERC721, <a href="src/erc721/IERC721Mintable.sol//src/IMintable.sol/interface.IM
 <p>Emitted when an ERC721 token is minted.</p>
 <pre><code class="language-solidity">event LogMintedERC721(address indexed to_, uint256 tokenId_);
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-3"><a class="header" href="#contents-3">Contents</a></h1>
+<h2 id="errors-3"><a class="header" href="#errors-3">Errors</a></h2>
+<h3 id="invalidmintamounterror-2"><a class="header" href="#invalidmintamounterror-2">InvalidMintAmountError</a></h3>
+<p>Thrown when an invalid mint amount is requested.</p>
+<pre><code class="language-solidity">error InvalidMintAmountError();
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-4"><a class="header" href="#contents-4">Contents</a></h1>
 <ul>
 <li><a href="src/utils/ByteUtils.sol/library.ByteUtils.html">ByteUtils</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="byteutils"><a class="header" href="#byteutils">ByteUtils</a></h1>
-<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/19da87a17659f402b125b2af0f91f83f8fd63de7/src/utils/ByteUtils.sol">Git Source</a></p>
+<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/07a37e020f9da35e6453f48544b4cea4732dd0f6/src/utils/ByteUtils.sol">Git Source</a></p>
 <p><strong>Author:</strong>
 StarkExpress Team</p>
 <p>Library for byte array manipulation.</p>
@@ -439,65 +499,7 @@ StarkExpress Team</p>
 <div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>result_</code></td><td><code>uint256</code></td><td>The converted <code>uint256</code> value.</td></tr>
 </tbody></table>
-</div><div style="break-before: page; page-break-before: always;"></div><h1 id="imintable"><a class="header" href="#imintable">IMintable</a></h1>
-<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/19da87a17659f402b125b2af0f91f83f8fd63de7/src/IMintable.sol">Git Source</a></p>
-<p><strong>Inherits:</strong>
-IERC165</p>
-<p><strong>Author:</strong>
-StarkExpress Team</p>
-<p>Interface for mintable StarkExpress tokens.</p>
-<h2 id="functions-6"><a class="header" href="#functions-6">Functions</a></h2>
-<h3 id="mintfor-3"><a class="header" href="#mintfor-3">mintFor</a></h3>
-<p>Mints tokens to a specified address.</p>
-<pre><code class="language-solidity">function mintFor(address to_, uint256 amount_, bytes calldata mintingBlob_) external;
-</code></pre>
-<p><strong>Parameters</strong></p>
-<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>to_</code></td><td><code>address</code></td><td>The address that will receive the minted tokens.</td></tr>
-<tr><td><code>amount_</code></td><td><code>uint256</code></td><td>The amount of tokens to mint.</td></tr>
-<tr><td><code>mintingBlob_</code></td><td><code>bytes</code></td><td>Additional data needed for the minting process.</td></tr>
-</tbody></table>
-</div><div style="break-before: page; page-break-before: always;"></div><h1 id="mintable"><a class="header" href="#mintable">Mintable</a></h1>
-<p><a href="https://github.com/threesigmaxyz/starkexpress-mintable-contracts/blob/19da87a17659f402b125b2af0f91f83f8fd63de7/src/Mintable.sol">Git Source</a></p>
-<p><strong>Inherits:</strong>
-ERC165, <a href="src/Mintable.sol//src/IMintable.sol/interface.IMintable.html">IMintable</a></p>
-<p><strong>Author:</strong>
-StarkExpress Team</p>
-<p>Base abstract class for mintable StarkExpress tokens.</p>
-<p><em>All mintable assets in the StarkExpress platform must extend this class.</em></p>
-<h2 id="state-variables-2"><a class="header" href="#state-variables-2">State Variables</a></h2>
-<h3 id="starkex"><a class="header" href="#starkex">starkEx</a></h3>
-<p>The StarkEx contract address.</p>
-<pre><code class="language-solidity">address public immutable starkEx;
-</code></pre>
-<h2 id="functions-7"><a class="header" href="#functions-7">Functions</a></h2>
-<h3 id="onlystarkex"><a class="header" href="#onlystarkex">onlyStarkEx</a></h3>
-<p>Throws if called by any account other than the StarkEx contract.</p>
-<pre><code class="language-solidity">modifier onlyStarkEx();
-</code></pre>
-<h3 id="constructor-3"><a class="header" href="#constructor-3">constructor</a></h3>
-<p>Constructor for the <code>Mintable</code> contract.</p>
-<pre><code class="language-solidity">constructor(address starkEx_);
-</code></pre>
-<p><strong>Parameters</strong></p>
-<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>starkEx_</code></td><td><code>address</code></td><td>The StarkEx contract address.</td></tr>
-</tbody></table>
 </div>
-<h3 id="supportsinterface-2"><a class="header" href="#supportsinterface-2">supportsInterface</a></h3>
-<p><em>See {IERC165-supportsInterface}.</em></p>
-<pre><code class="language-solidity">function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165, IERC165) returns (bool);
-</code></pre>
-<h2 id="errors-3"><a class="header" href="#errors-3">Errors</a></h2>
-<h3 id="notauthorizederror"><a class="header" href="#notauthorizederror">NotAuthorizedError</a></h3>
-<p>An unauthorized operation was requested.</p>
-<pre><code class="language-solidity">error NotAuthorizedError();
-</code></pre>
-<h3 id="zerovalueerror"><a class="header" href="#zerovalueerror">ZeroValueError</a></h3>
-<p>An argument with a non-zero value is passed as zero.</p>
-<pre><code class="language-solidity">error ZeroValueError();
-</code></pre>
-
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
@@ -540,5 +542,6 @@ StarkExpress Team</p>
         });
         </script>
 
+    </div>
     </body>
 </html>
